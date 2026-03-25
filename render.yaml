@@ -11,17 +11,15 @@ services:
       - key: PORT
         value: "10000"
 
-  # Frontend — React SPA (Vite/Node)
-  - type: static
+  # Frontend — React SPA (Static Site)
+  - type: web
     name: aegis-app
-    runtime: node
+    runtime: static
     buildCommand: "cd frontend && npm install && npm run build"
     publishDir: "frontend/dist"
     envVars:
       - key: VITE_GROQ_API_KEY
         sync: false # Set manually in Render dashboard
-      # If you want the frontend to talk to THIS specific backend,
-      # you would set VITE_BACKEND_URL to the URL of the 'aegis-api' service.
     routes:
       - type: rewrite
         source: "/*"
