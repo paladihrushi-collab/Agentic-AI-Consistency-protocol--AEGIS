@@ -1,0 +1,28 @@
+services:
+  # Backend — FastAPI (Python 3.11)
+  - type: web
+    name: aegis-api
+    runtime: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false # Set manually in Render dashboard
+      - key: PORT
+        value: "10000"
+
+  # Frontend — React SPA (Vite/Node)
+  - type: static
+    name: aegis-app
+    runtime: node
+    buildCommand: "cd frontend && npm install && npm run build"
+    publishDir: "frontend/dist"
+    envVars:
+      - key: VITE_GROQ_API_KEY
+        sync: false # Set manually in Render dashboard
+      # If you want the frontend to talk to THIS specific backend,
+      # you would set VITE_BACKEND_URL to the URL of the 'aegis-api' service.
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"

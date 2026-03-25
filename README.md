@@ -1,5 +1,8 @@
 # AEGIS — Agentic Edge Graph Intelligence System
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/paladihrushi-collab/Agentic-AI-Consistency-protocol--AEGIS)
+
+
 **Shared Memory-Based Consistency Protocol using Agentic AI**
 
 > IEEE Major Project · 2025–26  
