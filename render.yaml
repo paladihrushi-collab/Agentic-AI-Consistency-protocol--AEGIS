@@ -2,20 +2,20 @@ services:
   # Backend
   - type: web
     name: aegis-api
-    runtime: python
-    buildCommand: "cd backend && pip install -r requirements.txt"
-    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GROQ_API_KEY
         sync: false
-      - key: PORT
-        value: "10000"
 
-  # Frontend (Standard Static Site)
+  # Frontend
   - type: static
     name: aegis-app
-    buildCommand: "cd frontend && npm install && npm run build"
-    publishDir: "frontend/dist"
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     envVars:
       - key: VITE_GROQ_API_KEY
         sync: false
